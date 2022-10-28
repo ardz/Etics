@@ -1,3 +1,4 @@
+using Etics.Server.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Etics.Server.Controllers;
@@ -7,16 +8,22 @@ namespace Etics.Server.Controllers;
 public class RequestKeyboardInputController : ControllerBase
 {
     private readonly ILogger<RequestKeyboardInputController> _logger;
+    private readonly KeyboardInputService _keyboardInputService;
+    private readonly GameLogTailingService _gameLogTailingService;
 
-    public RequestKeyboardInputController(ILogger<RequestKeyboardInputController> logger)
+    public RequestKeyboardInputController(ILogger<RequestKeyboardInputController> logger,
+        KeyboardInputService keyboardInputService, GameLogTailingService gameLogTailingService)
     {
         _logger = logger;
+        _keyboardInputService = keyboardInputService;
+        _gameLogTailingService = gameLogTailingService;
     }
 
-    //[HttpGet(Name = "GetWeatherForecast")]
-    public Task<ActionResult> PostKeyboardInput(EliteShipInputCommand eliteShipInputCommand)
+    [HttpPost(Name = "PostKeyboardInput")]
+    public async Task<IActionResult> PostKeyboardInput([FromBody] EliteShipInputCommand eliteShipInputCommand)
     {
+        _keyboardInputService.SendKeystrokes();
 
-        return null;
+        return this.Ok();
     }
 }
