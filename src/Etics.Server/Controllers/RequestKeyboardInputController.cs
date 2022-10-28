@@ -1,4 +1,5 @@
 using Etics.Server.Abstractions;
+using Etics.Server.Controllers.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Etics.Server.Controllers;
@@ -20,7 +21,8 @@ public class RequestKeyboardInputController : ControllerBase
     [HttpPost(Name = "PostKeyboardInput")]
     public async Task<IActionResult> PostKeyboardInput([FromBody] ClientInputCommand clientInputCommand)
     {
-        _keyboardInputService.SendKeystrokes(clientInputCommand);
+        _keyboardInputService.KeyboardInputHandler(clientInputCommand.Date, clientInputCommand.Keys,
+            clientInputCommand.Summary);
 
         return Ok();
     }

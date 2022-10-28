@@ -13,32 +13,24 @@ public class KeyboardInputService : IKeyboardInputService
         _simulator = new InputSimulator();
     }
 
-    public void Foo(DateTime timestamp, string[] keyboardCommands, string summary)
+    public void KeyboardInputHandler(DateTime timestamp, string[] keyboardCommands, string? summary)
     {
         if (keyboardCommands.Length > 1)
         {
-            
-            
-            SendModifiedKeystroke();
+            // SendModifiedKeystroke();
             
             return;
         }
-        
-        SendKeyPress();
     }
 
-    private void SendKeyPress()
+    private void SendModifiedKeystrokes(IEnumerable<VirtualKeyCode> modifierKeyCodes,
+        IEnumerable<VirtualKeyCode> keyCodes)
     {
-        
+        _simulator.Keyboard.ModifiedKeyStroke(modifierKeyCodes, keyCodes);
     }
 
-    private void SendModifiedKeystroke()
+    private void SendKey(VirtualKeyCode keyCode)
     {
-        _simulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.MENU, VirtualKeyCode.SPACE);
-    }
-
-    public void SendKeystrokes(ClientInputCommand clientInputCommand)
-    {
-        throw new NotImplementedException();
+        _simulator.Keyboard.KeyPress(keyCode);
     }
 }

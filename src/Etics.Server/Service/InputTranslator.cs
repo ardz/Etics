@@ -1,3 +1,5 @@
+using Etics.Server.Exceptions;
+using Etics.Server.Service.Models;
 using WindowsInput.Native;
 
 namespace Etics.Server.Service;
@@ -8,7 +10,21 @@ public class InputTranslator
     {
     }
 
-    private readonly IDictionary<string, VirtualKeyCode> _keyMapper = new Dictionary<string, VirtualKeyCode>()
+    private readonly IDictionary<string, VirtualKeyCode> _modifierKeyMapper = new Dictionary<string, VirtualKeyCode>
+    {
+        // modifiers
+        { "LEFT_SHIFT", VirtualKeyCode.LSHIFT },
+        { "RIGHT_SHIFT", VirtualKeyCode.RSHIFT },
+        { "LEFT_ALT", VirtualKeyCode.LMENU },
+        { "RIGHT_ALT", VirtualKeyCode.RMENU },
+        { "LEFT_WINDOWS", VirtualKeyCode.LWIN },
+        { "RIGHT_WINDOWS", VirtualKeyCode.RWIN },
+        { "APPS", VirtualKeyCode.APPS },
+        { "RIGHT_CONTROL", VirtualKeyCode.RCONTROL },
+        { "LEFT_CONTROL", VirtualKeyCode.LCONTROL },
+    };
+
+    private readonly IDictionary<string, VirtualKeyCode> _keyMapper = new Dictionary<string, VirtualKeyCode>
     {
         // escape
         { "ESC", VirtualKeyCode.ESCAPE },
@@ -51,6 +67,9 @@ public class InputTranslator
 
         // caps
         { "CAPS", VirtualKeyCode.CAPITAL },
+        
+        // space
+        { "SPACE", VirtualKeyCode.SPACE },
 
         // non alpha numeric chars
         { "CONSOLE", VirtualKeyCode.OEM_8 },
@@ -65,15 +84,6 @@ public class InputTranslator
         { "PERIOD", VirtualKeyCode.OEM_PERIOD }, //  ( . )
         { "FORWARD_SLASH", VirtualKeyCode.OEM_2 }, // ( / )
         { "BACKSLASH", VirtualKeyCode.OEM_5 }, //  ( \ )
-
-        // modifiers
-        { "LEFT_SHIFT", VirtualKeyCode.LSHIFT },
-        { "RIGHT_SHIFT", VirtualKeyCode.RSHIFT },
-        { "LEFT_ALT", VirtualKeyCode.LMENU },
-        { "RIGHT_ALT", VirtualKeyCode.RMENU },
-        { "LEFT_WINDOWS", VirtualKeyCode.LWIN },
-        { "RIGHT_WINDOWS", VirtualKeyCode.RWIN },
-        { "APPS", VirtualKeyCode.APPS },
 
         // numbers
         { "1", VirtualKeyCode.VK_1 },
@@ -138,8 +148,17 @@ public class InputTranslator
         { "RIGHT", VirtualKeyCode.RIGHT },
     };
 
-    public VirtualKeyCode TranslateInput(string input)
+    public KeyboardInput GetVirtualKeyCode(string input)
     {
-        return _keyMapper.ContainsKey(input) ? _keyMapper[input] : throw new Exception();
+        var keyboardInput = new KeyboardInput();
+
+        var keyCode = _keyMapper.ContainsKey(input)
+            ? _keyMapper[input]
+            : throw new InputKeyTranslationException($"Couldn't map {input} to a valid virtual key code!");
+        
+        keyboardInput.IsModifier = _modifierKeyMapper.ContainsKey(input);
+        keyboardInput.VirtualKeyCode = keyCode;
+
+        return keyboardInput;
     }
 }

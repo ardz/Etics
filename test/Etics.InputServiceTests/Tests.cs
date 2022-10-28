@@ -1,4 +1,5 @@
 using Etics.Server;
+using Etics.Server.Controllers.Models;
 
 namespace Etics.InputServiceTests;
 

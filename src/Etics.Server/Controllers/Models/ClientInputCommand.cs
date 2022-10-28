@@ -1,4 +1,4 @@
-namespace Etics.Server;
+namespace Etics.Server.Controllers.Models;
 
 public class ClientInputCommand
 {
