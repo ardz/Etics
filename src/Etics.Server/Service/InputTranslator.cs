@@ -58,13 +58,13 @@ public class InputTranslator
         { "PLUS", VirtualKeyCode.OEM_PLUS },
         { "SQUARE_BRACKET_LEFT", VirtualKeyCode.OEM_4 },
         { "SQUARE_BRACKET_RIGHT", VirtualKeyCode.OEM_6 },
-        { "SEMI_COLON", VirtualKeyCode.OEM_1 }, // ;
-        { "SINGLE_QUOTE", VirtualKeyCode.OEM_3 }, // '
-        { "HASHTAG", VirtualKeyCode.OEM_7 }, // #
-        { "COMMA", VirtualKeyCode.OEM_COMMA }, // ,
-        { "PERIOD", VirtualKeyCode.OEM_PERIOD }, // .
-        { "FORWARD_SLASH", VirtualKeyCode.OEM_2 }, // /
-        { "BACKSLASH", VirtualKeyCode.OEM_5 }, // \
+        { "SEMI_COLON", VirtualKeyCode.OEM_1 }, // ( ; )
+        { "SINGLE_QUOTE", VirtualKeyCode.OEM_3 }, //  ( ' )
+        { "HASHTAG", VirtualKeyCode.OEM_7 }, //  ( # )
+        { "COMMA", VirtualKeyCode.OEM_COMMA }, //  ( , )
+        { "PERIOD", VirtualKeyCode.OEM_PERIOD }, //  ( . )
+        { "FORWARD_SLASH", VirtualKeyCode.OEM_2 }, // ( / )
+        { "BACKSLASH", VirtualKeyCode.OEM_5 }, //  ( \ )
 
         // modifiers
         { "LEFT_SHIFT", VirtualKeyCode.LSHIFT },
@@ -138,8 +138,8 @@ public class InputTranslator
         { "RIGHT", VirtualKeyCode.RIGHT },
     };
 
-    public VirtualKeyCode TranslateInput(string inputKey)
+    public VirtualKeyCode TranslateInput(string input)
     {
-        return _keyMapper.ContainsKey(inputKey) ? _keyMapper[inputKey] : throw new Exception();
+        return _keyMapper.ContainsKey(input) ? _keyMapper[input] : throw new Exception();
     }
 }
