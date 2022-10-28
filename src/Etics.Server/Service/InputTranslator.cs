@@ -12,7 +12,7 @@ public class InputTranslator
     {
         // escape
         { "ESC", VirtualKeyCode.ESCAPE },
-        
+
         // function keys
         { "F1", VirtualKeyCode.F1 },
         { "F2", VirtualKeyCode.F2 },
@@ -26,7 +26,84 @@ public class InputTranslator
         { "F10", VirtualKeyCode.F10 },
         { "F11", VirtualKeyCode.F11 },
         { "F12", VirtualKeyCode.F12 },
-        
+
+        // print screen, scroll lock, pause
+        { "PRINT_SCREEN", VirtualKeyCode.SNAPSHOT },
+        { "SCROLL_LOCK", VirtualKeyCode.SCROLL },
+        { "PAUSE", VirtualKeyCode.PAUSE },
+
+        // insert [to] page down
+        { "INSERT", VirtualKeyCode.INSERT },
+        { "HOME", VirtualKeyCode.HOME },
+        { "PAGE_UP", VirtualKeyCode.PRIOR },
+        { "DEL", VirtualKeyCode.DELETE },
+        { "END", VirtualKeyCode.END },
+        { "PAGE_DOWN", VirtualKeyCode.NEXT },
+
+        // backspace
+        { "BACKSPACE", VirtualKeyCode.BACK },
+
+        // enter
+        { "ENTER", VirtualKeyCode.RETURN },
+
+        // tab
+        { "TAB", VirtualKeyCode.TAB },
+
+        // caps
+        { "CAPS", VirtualKeyCode.CAPITAL },
+
+        // non alpha numeric chars
+        { "CONSOLE", VirtualKeyCode.OEM_8 },
+        { "MINUS", VirtualKeyCode.OEM_MINUS },
+        { "PLUS", VirtualKeyCode.OEM_PLUS },
+        { "SQUARE_BRACKET_LEFT", VirtualKeyCode.OEM_4 },
+        { "SQUARE_BRACKET_RIGHT", VirtualKeyCode.OEM_6 },
+        { "SEMI_COLON", VirtualKeyCode.OEM_1 }, // ;
+        { "SINGLE_QUOTE", VirtualKeyCode.OEM_3 }, // '
+        { "HASHTAG", VirtualKeyCode.OEM_7 }, // #
+        { "COMMA", VirtualKeyCode.OEM_COMMA }, // ,
+        { "PERIOD", VirtualKeyCode.OEM_PERIOD }, // .
+        { "FORWARD_SLASH", VirtualKeyCode.OEM_2 }, // /
+        { "BACKSLASH", VirtualKeyCode.OEM_5 }, // \
+
+        // modifiers
+        { "LEFT_SHIFT", VirtualKeyCode.LSHIFT },
+        { "RIGHT_SHIFT", VirtualKeyCode.RSHIFT },
+        { "LEFT_ALT", VirtualKeyCode.LMENU },
+        { "RIGHT_ALT", VirtualKeyCode.RMENU },
+        { "LEFT_WINDOWS", VirtualKeyCode.LWIN },
+        { "RIGHT_WINDOWS", VirtualKeyCode.RWIN },
+        { "APPS", VirtualKeyCode.APPS },
+
+        // numbers
+        { "1", VirtualKeyCode.VK_1 },
+        { "2", VirtualKeyCode.VK_2 },
+        { "3", VirtualKeyCode.VK_3 },
+        { "4", VirtualKeyCode.VK_4 },
+        { "5", VirtualKeyCode.VK_5 },
+        { "6", VirtualKeyCode.VK_6 },
+        { "7", VirtualKeyCode.VK_7 },
+        { "8", VirtualKeyCode.VK_8 },
+        { "9", VirtualKeyCode.VK_9 },
+        { "0", VirtualKeyCode.VK_0 },
+        { "NUM1", VirtualKeyCode.NUMPAD1 },
+        { "NUM2", VirtualKeyCode.NUMPAD2 },
+        { "NUM3", VirtualKeyCode.NUMPAD3 },
+        { "NUM4", VirtualKeyCode.NUMPAD4 },
+        { "NUM5", VirtualKeyCode.NUMPAD5 },
+        { "NUM6", VirtualKeyCode.NUMPAD6 },
+        { "NUM7", VirtualKeyCode.NUMPAD7 },
+        { "NUM8", VirtualKeyCode.NUMPAD8 },
+        { "NUM9", VirtualKeyCode.NUMPAD9 },
+        { "NUM0", VirtualKeyCode.NUMPAD0 },
+
+        // arithmetic
+        { "MULTIPLY", VirtualKeyCode.MULTIPLY },
+        { "ADD", VirtualKeyCode.ADD },
+        { "SUBTRACT", VirtualKeyCode.SUBTRACT },
+        { "DIVIDE", VirtualKeyCode.DIVIDE },
+        { "DECIMAL", VirtualKeyCode.DECIMAL },
+
         // letters
         { "A", VirtualKeyCode.VK_A },
         { "B", VirtualKeyCode.VK_B },
@@ -53,6 +130,12 @@ public class InputTranslator
         { "X", VirtualKeyCode.VK_X },
         { "Y", VirtualKeyCode.VK_Y },
         { "Z", VirtualKeyCode.VK_Z },
+
+        // arrows
+        { "LEFT", VirtualKeyCode.LEFT },
+        { "UP", VirtualKeyCode.UP },
+        { "DOWN", VirtualKeyCode.DOWN },
+        { "RIGHT", VirtualKeyCode.RIGHT },
     };
 
     public VirtualKeyCode TranslateInput(string inputKey)
