@@ -20,10 +20,10 @@ public class RequestKeyboardInputController : ControllerBase
     }
 
     [HttpPost(Name = "PostKeyboardInput")]
-    public async Task<IActionResult> PostKeyboardInput([FromBody] EliteShipInputCommand eliteShipInputCommand)
+    public async Task<IActionResult> PostKeyboardInput([FromBody] ClientInputCommand clientInputCommand)
     {
         _keyboardInputService.SendKeystrokes();
 
-        return this.Ok();
+        return Ok();
     }
 }

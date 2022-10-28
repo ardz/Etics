@@ -1,6 +1,6 @@
 namespace Etics.Server;
 
-public class EliteShipInputCommand
+public class ClientInputCommand
 {
     public DateTime Date { get; set; }
 
