@@ -1,4 +1,4 @@
-using Etics.Server.Service;
+using Etics.Server.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Etics.Server.Controllers;
@@ -8,15 +8,13 @@ namespace Etics.Server.Controllers;
 public class RequestKeyboardInputController : ControllerBase
 {
     private readonly ILogger<RequestKeyboardInputController> _logger;
-    private readonly KeyboardInputService _keyboardInputService;
-    private readonly GameLogTailingService _gameLogTailingService;
+    private readonly IKeyboardInputService _keyboardInputService;
 
     public RequestKeyboardInputController(ILogger<RequestKeyboardInputController> logger,
-        KeyboardInputService keyboardInputService, GameLogTailingService gameLogTailingService)
+        IKeyboardInputService keyboardInputService)
     {
         _logger = logger;
         _keyboardInputService = keyboardInputService;
-        _gameLogTailingService = gameLogTailingService;
     }
 
     [HttpPost(Name = "PostKeyboardInput")]
