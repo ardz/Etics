@@ -1,17 +1,19 @@
-﻿using WindowsInput;
+﻿using Etics.Server.Abstractions;
+using WindowsInput;
 
 namespace Etics.Server.Service;
 
-public class KeyboardInputService
+public class KeyboardInputService : IKeyboardInputService
 {
     private readonly InputSimulator _simulator;
 
     public KeyboardInputService()
     {
-        this._simulator = new InputSimulator();
+        _simulator = new InputSimulator();
     }
 
-    public void SendKeystrokes()
+    public void SendKeystrokes(ClientInputCommand clientInputCommand)
     {
+        throw new NotImplementedException();
     }
 }

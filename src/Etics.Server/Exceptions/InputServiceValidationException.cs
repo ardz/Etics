@@ -8,8 +8,8 @@ public class InputServiceValidationException : Exception
 
     private InputServiceValidationException(string memberName, string? message = null) : base(message)
     {
-        this.Error = message ?? $"{memberName} must be supplied";
-        this.MemberName = memberName;
+        Error = message ?? $"{memberName} must be supplied";
+        MemberName = memberName;
     }
     
     public string Error { get; }
