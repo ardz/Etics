@@ -1,21 +1,22 @@
-using Etics.Server;
-using Etics.Server.Controllers.Models;
-using System.Text.Json;
+using Etics.Server.Exceptions;
+using Etics.Server.Service;
 
 namespace Etics.InputServiceTests;
 
 public class Tests
 {
+    private static StringToVirtualKeyCodeTranslator Translator => new();
+    
     [Fact]
-    public void Test1()
+    public void InvalidKeyStringsSpecified_ExpectTranslationError()
     {
-        var command = new ClientInputCommand
-        {
-            Date = DateTime.Now,
-            Keys = new[] { "CTRL", "SHIFT", "F" },
-            Summary = "Engage frameshift drive"
-        };
+        var keys = new[] { "CTRL", "SHIFT" };
 
-        var requestBody = JsonSerializer.Serialize(command);
+        foreach (var key in keys)
+        {
+            void Act() => Translator.GetVirtualKeyCode(key);
+
+            Assert.Throws<InputKeyTranslationException>((Action)Act);
+        }
     }
 }
