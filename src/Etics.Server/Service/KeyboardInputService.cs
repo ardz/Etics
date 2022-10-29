@@ -21,9 +21,6 @@ public class KeyboardInputService : IKeyboardInputService
         var modifierKeyboardInputs = new List<KeyboardInput>();
         var keyboardInputs = new List<KeyboardInput>();
 
-        var modifierCount = 0;
-        var keyCount = 0;
-
         foreach (var command in keyboardCommands)
         {
             var key = _inputTranslator.GetVirtualKeyCode(command);
@@ -39,17 +36,16 @@ public class KeyboardInputService : IKeyboardInputService
         }
 
         var modifiers = modifierKeyboardInputs.Select(x => x.VirtualKeyCode);
-        var modifierVirtualKeyCodes = modifiers as VirtualKeyCode[] ?? modifiers.ToArray();
-        modifierCount = modifierVirtualKeyCodes.ToList().Count;
+        var modifierKeyCodes = modifiers.ToList();
+        var modifierCount = modifierKeyCodes.ToList().Count;
         
         var keys = keyboardInputs.Select(x => x.VirtualKeyCode);
-        var keyCodes = keys as VirtualKeyCode[] ?? keys.ToArray();
-        var virtualKeyCodes = keys as VirtualKeyCode[] ?? keyCodes.ToArray();
-        keyCount = virtualKeyCodes.ToList().Count;
+        var virtualKeyCodes = keys.ToList();
+        var keyCount = virtualKeyCodes.ToList().Count;
 
         if (modifierCount > 0 && keyCount > 0)
         {
-            SendModifiedKeystrokes(modifierVirtualKeyCodes, virtualKeyCodes);
+            SendModifiedKeystrokes(modifierKeyCodes, virtualKeyCodes);
             
             return;
         }
@@ -57,7 +53,7 @@ public class KeyboardInputService : IKeyboardInputService
         switch (modifierCount)
         {
             case > 0 when keyCount == 0:
-                SendKeySequence(modifierVirtualKeyCodes);
+                SendKeySequence(modifierKeyCodes);
                 break;
             case 0 when keyCount > 0:
                 SendKeySequence(virtualKeyCodes);
