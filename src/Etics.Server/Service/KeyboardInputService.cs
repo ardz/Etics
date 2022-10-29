@@ -39,22 +39,26 @@ public class KeyboardInputService : IKeyboardInputService
         }
 
         var modifiers = modifierKeyboardInputs.Select(x => x.VirtualKeyCode);
-        var modifierKeyCodes = modifiers as VirtualKeyCode[] ?? modifiers.ToArray();
-        modifierCount = modifierKeyCodes.ToList().Count;
+        var modifierVirtualKeyCodes = modifiers as VirtualKeyCode[] ?? modifiers.ToArray();
+        modifierCount = modifierVirtualKeyCodes.ToList().Count;
         
         var keys = keyboardInputs.Select(x => x.VirtualKeyCode);
         var keyCodes = keys as VirtualKeyCode[] ?? keys.ToArray();
         var virtualKeyCodes = keys as VirtualKeyCode[] ?? keyCodes.ToArray();
         keyCount = virtualKeyCodes.ToList().Count;
 
+        if (modifierCount > 0 && keyCount > 0)
+        {
+            SendModifiedKeystrokes(modifierVirtualKeyCodes, virtualKeyCodes);
+        }
+
         switch (modifierCount)
         {
-            case > 0:
-                SendModifiedKeystrokes(modifierKeyCodes, virtualKeyCodes);
-
-                return;
+            case > 0 when keyCount == 0:
+                SendKeySequence(modifierVirtualKeyCodes);
+                break;
             case 0 when keyCount > 0:
-                SendKeySequence(keyCodes);
+                SendKeySequence(virtualKeyCodes);
                 break;
         }
     }
