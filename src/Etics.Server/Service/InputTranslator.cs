@@ -6,10 +6,6 @@ namespace Etics.Server.Service;
 
 public class InputTranslator
 {
-    public InputTranslator()
-    {
-    }
-
     private readonly IDictionary<string, VirtualKeyCode> _modifierKeyMapper = new Dictionary<string, VirtualKeyCode>
     {
         // modifiers
