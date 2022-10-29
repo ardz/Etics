@@ -8,15 +8,15 @@ namespace Etics.Server.Service;
 public class KeyboardInputService : IKeyboardInputService
 {
     private readonly InputSimulator _simulator;
-    private readonly InputTranslator _inputTranslator;
+    private readonly StringToVirtualKeyCodeTranslator _inputTranslator;
 
     public KeyboardInputService()
     {
         _simulator = new InputSimulator();
-        _inputTranslator = new InputTranslator();
+        _inputTranslator = new StringToVirtualKeyCodeTranslator();
     }
 
-    public void KeyboardInputHandler(DateTime timestamp, string[] keyboardCommands, string? summary)
+    public void KeyboardInputHandler(DateTime timestamp, string[]? keyboardCommands, string? summary)
     {
         var modifierKeyboardInputs = new List<KeyboardInput>();
         var keyboardInputs = new List<KeyboardInput>();

@@ -4,7 +4,7 @@ using WindowsInput.Native;
 
 namespace Etics.Server.Service;
 
-public class InputTranslator
+public class StringToVirtualKeyCodeTranslator
 {
     private readonly IDictionary<string, VirtualKeyCode> _modifierKeyMapper = new Dictionary<string, VirtualKeyCode>
     {
@@ -17,7 +17,7 @@ public class InputTranslator
         { "RIGHT_WINDOWS", VirtualKeyCode.RWIN },
         { "APPS", VirtualKeyCode.APPS },
         { "RIGHT_CONTROL", VirtualKeyCode.RCONTROL },
-        { "LEFT_CONTROL", VirtualKeyCode.LCONTROL },
+        { "LEFT_CONTROL", VirtualKeyCode.LCONTROL }
     };
 
     private readonly IDictionary<string, VirtualKeyCode> _keyMapper = new Dictionary<string, VirtualKeyCode>
@@ -142,6 +142,17 @@ public class InputTranslator
         { "UP", VirtualKeyCode.UP },
         { "DOWN", VirtualKeyCode.DOWN },
         { "RIGHT", VirtualKeyCode.RIGHT },
+        
+        // modifiers
+        { "LEFT_SHIFT", VirtualKeyCode.LSHIFT },
+        { "RIGHT_SHIFT", VirtualKeyCode.RSHIFT },
+        { "LEFT_ALT", VirtualKeyCode.LMENU },
+        { "RIGHT_ALT", VirtualKeyCode.RMENU },
+        { "LEFT_WINDOWS", VirtualKeyCode.LWIN },
+        { "RIGHT_WINDOWS", VirtualKeyCode.RWIN },
+        { "APPS", VirtualKeyCode.APPS },
+        { "RIGHT_CONTROL", VirtualKeyCode.RCONTROL },
+        { "LEFT_CONTROL", VirtualKeyCode.LCONTROL }
     };
 
     public KeyboardInput GetVirtualKeyCode(string input)
@@ -151,8 +162,12 @@ public class InputTranslator
         var keyCode = _keyMapper.ContainsKey(input)
             ? _keyMapper[input]
             : throw new InputKeyTranslationException($"Couldn't map {input} to a valid virtual key code!");
+
+        if (_modifierKeyMapper.ContainsKey(input))
+        {
+            keyboardInput.IsModifier = true;
+        }
         
-        keyboardInput.IsModifier = _modifierKeyMapper.ContainsKey(input);
         keyboardInput.VirtualKeyCode = keyCode;
 
         return keyboardInput;

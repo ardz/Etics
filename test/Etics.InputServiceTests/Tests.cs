@@ -1,5 +1,6 @@
 using Etics.Server;
 using Etics.Server.Controllers.Models;
+using System.Text.Json;
 
 namespace Etics.InputServiceTests;
 
@@ -14,5 +15,7 @@ public class Tests
             Keys = new[] { "CTRL", "SHIFT", "F" },
             Summary = "Engage frameshift drive"
         };
+
+        var requestBody = JsonSerializer.Serialize(command);
     }
 }

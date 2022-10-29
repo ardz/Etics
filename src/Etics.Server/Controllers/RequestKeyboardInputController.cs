@@ -19,11 +19,11 @@ public class RequestKeyboardInputController : ControllerBase
     }
 
     [HttpPost(Name = "PostKeyboardInput")]
-    public async Task<IActionResult> PostKeyboardInput([FromBody] ClientInputCommand clientInputCommand)
+    public Task<IActionResult> PostKeyboardInput([FromBody] ClientInputCommand clientInputCommand)
     {
         _keyboardInputService.KeyboardInputHandler(clientInputCommand.Date, clientInputCommand.Keys,
             clientInputCommand.Summary);
 
-        return Ok();
+        return Task.FromResult<IActionResult>(Ok());
     }
 }

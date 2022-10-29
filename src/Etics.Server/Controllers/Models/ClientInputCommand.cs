@@ -1,10 +1,10 @@
 namespace Etics.Server.Controllers.Models;
 
-public class ClientInputCommand
+public struct ClientInputCommand
 {
-    public DateTime Date { get; set; }
+    public DateTime Date { get; init; }
 
-    public string[] Keys { get; set; }
+    public string[]? Keys { get; init; }
 
-    public string? Summary { get; set; }
+    public string? Summary { get; init; }
 }
