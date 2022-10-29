@@ -50,6 +50,8 @@ public class KeyboardInputService : IKeyboardInputService
         if (modifierCount > 0 && keyCount > 0)
         {
             SendModifiedKeystrokes(modifierVirtualKeyCodes, virtualKeyCodes);
+            
+            return;
         }
 
         switch (modifierCount)
