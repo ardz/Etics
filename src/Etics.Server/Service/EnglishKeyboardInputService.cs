@@ -5,12 +5,12 @@ using WindowsInput.Native;
 
 namespace Etics.Server.Service;
 
-public class KeyboardInputService : IKeyboardInputService
+public class EnglishKeyboardInputService : IKeyboardInputService
 {
     private readonly InputSimulator _simulator;
     private readonly StringToVirtualKeyCodeTranslator _inputTranslator;
 
-    public KeyboardInputService()
+    public EnglishKeyboardInputService()
     {
         _simulator = new InputSimulator();
         _inputTranslator = new StringToVirtualKeyCodeTranslator();
